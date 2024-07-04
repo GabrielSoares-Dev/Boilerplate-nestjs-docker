@@ -1,0 +1,15 @@
+name: DEPLOY - STG
+on:
+   workflow_dispatch:
+jobs:
+  docker_portainer:
+    name: deploy
+    uses: GabrielSoares-Dev/workflows/.github/workflows/nestjs-docker-portainer-deploy.yml@master
+    with:
+      dockerfile_dir: .
+      dockerfile_name: Dockerfile.prod
+      image: gabrielsoaresdev/boilerplate-nestjs-docker:latest
+    secrets:
+      docker_hub_username: ${{secrets.DOCKER_HUB_USERNAME}}
+      docker_hub_access_token: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
+      web_hook_portainer_url: ${{secrets.WEB_HOOK_DOCKER_URL_STG}}
