@@ -1,37 +1,14 @@
 name: CI
 on:
+  workflow_dispatch:
   pull_request:
     branches:
       - master
 jobs:
-  CI:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:5.7
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: password
-          MYSQL_DATABASE: boilerplate-nestjs-docker-test
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v1
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18.x'
-      - name: Install dependencies
-        run: npm i
-      - name: Update .env.test for CI
-        run: sed -i 's|mysql://root:password@mysql:3306/boilerplate-nestjs-docker-test|mysql://root:password@localhost:3306/boilerplate-nestjs-docker-test|' .env.test
-      - name: Running migrations
-        run: npm run migrate:test
-      - name: Typecheck
-        run: npm run typecheck
-      - name: Lint
-        run: npm run lint:test
-      - name: Coverage
-        run: npm run test:coverage
-      - name: Integration tests
-        run: npm run test:integration
+  docker_portainer:
+    name: CI
+    uses: GabrielSoares-Dev/workflows/.github/workflows/nestjs-docker-portainer-CI.yml@master
+    with:
+      node_version: '18.x'
+      mysql_version: mysql:5.7
+      mysql_db_name: boilerplate-nestjs-docker-test
