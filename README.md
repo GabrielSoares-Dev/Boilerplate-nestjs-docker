@@ -145,6 +145,6 @@ npm run seed
 
 You can find the complete API documentation at the following Postman link:
 
-[![Running on postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/12430293/2sA3dsnu1z)
+[![Running on postman](https://run.pstmn.io/button.svg)](https://documenter.getpostman.com/view/37022898/2sA3kRHi7u)
 
 ## By Gabriel Soares Maciel
